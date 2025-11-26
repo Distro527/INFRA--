@@ -1,0 +1,9 @@
+Flask==3.0.3
+firebase-admin==6.5.0
+python-dotenv==1.0.1
+Markdown==3.6
+itsdangerous==2.2.0
+Pygments==2.18.0
+bleach==6.1.0
+stripe==7.9.0
+pyinstaller==6.14.2
