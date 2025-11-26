@@ -1,0 +1,64 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient definition -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1f2937;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4b5563;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Logo Icon - Abstract "V" shape with code brackets -->
+  <g transform="translate(10, 15)">
+    <!-- Left bracket -->
+    <path d="M 5 5 L 5 25 L 10 25 L 10 5 Z" fill="url(#logoGradient)" opacity="0.9"/>
+    
+    <!-- V shape -->
+    <path d="M 15 8 L 20 22 L 25 8 L 30 22 L 35 8" 
+          stroke="url(#logoGradient)" 
+          stroke-width="3" 
+          fill="none" 
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+    
+    <!-- Right bracket -->
+    <path d="M 40 5 L 40 25 L 45 25 L 45 5 Z" fill="url(#logoGradient)" opacity="0.9"/>
+    
+    <!-- Code dots -->
+    <circle cx="12" cy="30" r="1.5" fill="#8b5cf6"/>
+    <circle cx="20" cy="30" r="1.5" fill="#ec4899"/>
+    <circle cx="28" cy="30" r="1.5" fill="#3b82f6"/>
+    <circle cx="36" cy="30" r="1.5" fill="#8b5cf6"/>
+  </g>
+  
+  <!-- VoidSyn Text -->
+  <text x="65" y="35" 
+        font-family="'Segoe UI', 'Arial', sans-serif" 
+        font-size="24" 
+        font-weight="700" 
+        fill="url(#textGradient)">
+    Void
+  </text>
+  <text x="115" y="35" 
+        font-family="'Segoe UI', 'Arial', sans-serif" 
+        font-size="24" 
+        font-weight="700" 
+        fill="url(#logoGradient)">
+    Syn
+  </text>
+  
+  <!-- Tagline -->
+  <text x="65" y="48" 
+        font-family="'Segoe UI', 'Arial', sans-serif" 
+        font-size="8" 
+        font-weight="400" 
+        fill="#6b7280"
+        letter-spacing="1">
+    LEARN TO CODE
+  </text>
+</svg>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INFRA+- Logo Generator</title>
+</head>
+<body>
+    <canvas id="logoCanvas" width="400" height="120"></canvas>
+    <br>
+    <button onclick="downloadLogo()">Download PNG</button>
+    
+    <script>
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Create gradient
+        const gradient = ctx.createLinearGradient(0, 0, 400, 120);
+        gradient.addColorStop(0, '#3b82f6');
+        gradient.addColorStop(0.5, '#8b5cf6');
+        gradient.addColorStop(1, '#ec4899');
+        
+        // Clear canvas
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 400, 120);
+        
+        // Draw logo icon
+        ctx.save();
+        ctx.translate(20, 30);
+        
+        // Left bracket
+        ctx.fillStyle = gradient;
+        ctx.globalAlpha = 0.9;
+        ctx.fillRect(10, 10, 5, 40);
+        
+        // V shape
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 6;
+        ctx.globalAlpha = 1;
+        ctx.beginPath();
+        ctx.moveTo(30, 16);
+        ctx.lineTo(40, 44);
+        ctx.lineTo(50, 16);
+        ctx.stroke();
+        
+        // Right bracket
+        ctx.fillStyle = gradient;
+        ctx.globalAlpha = 0.9;
+        ctx.fillRect(60, 10, 5, 40);
+        
+        // Code dots
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#8b5cf6';
+        ctx.beginPath();
+        ctx.arc(24, 60, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.fillStyle = '#ec4899';
+        ctx.beginPath();
+        ctx.arc(40, 60, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.fillStyle = '#3b82f6';
+        ctx.beginPath();
+        ctx.arc(56, 60, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.restore();
+        
+        // Draw text
+        ctx.font = 'bold 48px "Segoe UI", Arial, sans-serif';
+        ctx.fillStyle = '#1f2937';
+        ctx.fillText('Void', 130, 70);
+        
+        ctx.fillStyle = gradient;
+        ctx.fillText('Syn', 230, 70);
+        
+        // Tagline
+        ctx.font = '16px "Segoe UI", Arial, sans-serif';
+        ctx.fillStyle = '#6b7280';
+        ctx.fillText('LEARN TO CODE', 130, 95);
+        
+        function downloadLogo() {
+            const link = document.createElement('a');
+            link.download = 'INFRA+--logo.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>

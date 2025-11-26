@@ -1,0 +1,45 @@
+<svg width="180" height="50" viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- ChatGPT-style logo mark -->
+  <g transform="translate(10, 15)">
+    <!-- Outer ring - black -->
+    <circle cx="15" cy="15" r="14" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+    
+    <!-- Inner design - green accent -->
+    <circle cx="15" cy="15" r="10" fill="#10A37F" opacity="0.1"/>
+    
+    <!-- Abstract infrastructure symbol -->
+    <g transform="translate(15, 15)">
+      <!-- Core square -->
+      <rect x="-4" y="-4" width="8" height="8" fill="#1A1A1A"/>
+      
+      <!-- Connection lines -->
+      <line x1="-4" y1="0" x2="-8" y2="0" stroke="#10A37F" stroke-width="2" stroke-linecap="round"/>
+      <line x1="4" y1="0" x2="8" y2="0" stroke="#10A37F" stroke-width="2" stroke-linecap="round"/>
+      <line x1="0" y1="-4" x2="0" y2="-8" stroke="#10A37F" stroke-width="2" stroke-linecap="round"/>
+      <line x1="0" y1="4" x2="0" y2="8" stroke="#10A37F" stroke-width="2" stroke-linecap="round"/>
+      
+      <!-- Plus nodes -->
+      <circle cx="-8" cy="0" r="2" fill="#10A37F"/>
+      <circle cx="8" cy="0" r="2" fill="#10A37F"/>
+      <circle cx="0" cy="-8" r="2" fill="#10A37F"/>
+      <circle cx="0" cy="8" r="2" fill="#10A37F"/>
+    </g>
+  </g>
+  
+  <!-- ChatGPT-style typography -->
+  <text x="45" y="32" 
+        font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" 
+        font-size="22" 
+        font-weight="600" 
+        fill="#1A1A1A">
+    INFRA
+  </text>
+  
+  <text x="95" y="32" 
+        font-family="'Inter', -apple-system, 'Segoe UI', sans-serif" 
+        font-size="22" 
+        font-weight="700" 
+        fill="#10A37F">
+    +
+  </text>
+</svg>
