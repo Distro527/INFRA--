@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-2xl font-bold">Courses</h1>
+<p class="text-slate-600 mt-2">Browse available lessons. New content will appear here automatically from the <code>content/</code> folder.</p>
+
+<ul class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for l in lessons %}
+    <li class="border rounded-lg bg-white p-4">
+      <h3 class="font-semibold">{{ l.title }}</h3>
+      {% if l.summary %}
+        <p class="text-sm text-slate-600 mt-1">{{ l.summary }}</p>
+      {% endif %}
+      {% if l.tags %}
+        <div class="mt-2 flex flex-wrap gap-2">
+          {% for t in l.tags %}
+            <span class="px-2 py-0.5 text-xs rounded bg-slate-100 text-slate-700">{{ t }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <a class="inline-block mt-3 text-indigo-600 hover:underline" href="/lesson/{{ l.slug }}">Open lesson</a>
+    </li>
+  {% else %}
+    <li>No lessons yet. Add JSON lesson files under <code>content/</code>.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

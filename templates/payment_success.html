@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="text-center py-16">
+  <div class="container max-w-2xl">
+    <div class="mb-8">
+      <svg class="w-16 h-16 text-success-color mx-auto" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    
+    <h1 class="text-4xl font-bold">Payment Successful!</h1>
+    <p class="text-secondary mt-4">Thank you for upgrading to INFRA+- Pro! You have now been registered as a Pro user and can access all Pro lessons and content.</p>
+    
+    <div class="mt-8 p-6 bg-success-light rounded-lg">
+      <h3 class="text-lg font-semibold text-success-color">What's next?</h3>
+      <ul class="mt-4 space-y-2 text-success-color">
+        <li>✓ Pro access has been activated for your account</li>
+        <li>✓ You can now access all Pro lessons and content</li>
+        <li>✓ Your progress tracking includes premium content</li>
+      </ul>
+    </div>
+    
+    <div class="mt-8 flex gap-4 justify-center">
+      <a href="/pro" class="btn btn-primary">Go to Pro Dashboard</a>
+      <a href="/courses" class="btn btn-outline">Browse All Courses</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

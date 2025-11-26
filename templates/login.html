@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-2xl font-bold">Sign In</h1>
+<p class="text-secondary mt-2">Use Google or email to sign in. A secure session cookie will be set.</p>
+
+<div class="mt-6 grid md:grid-cols-2 gap-8">
+  <div class="card">
+    <h2 class="font-semibold text-primary">Google</h2>
+    <button id="googleSignIn" class="btn btn-danger mt-3">Sign in with Google</button>
+  </div>
+
+  <div class="card">
+    <h2 class="font-semibold text-primary">Email & Password</h2>
+    <form id="emailForm" class="mt-3 space-y-3">
+      <div>
+        <label class="block text-sm font-medium text-primary">Email</label>
+        <input id="email" type="email" required class="form-control mt-1" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-primary">Password</label>
+        <input id="password" type="password" required class="form-control mt-1" />
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button id="register" type="button" class="btn btn-outline">Register</button>
+        <button id="resetBtn" type="button" class="btn btn-warning">Reset Password</button>
+      </div>
+    </form>
+    <div class="mt-6 border-t pt-4">
+      <h3 class="font-semibold text-primary">Magic Link</h3>
+      <p class="text-sm text-secondary mt-2">Alternatively, receive a sign-in link via email.</p>
+      <div class="mt-2 flex gap-2">
+        <input id="magicEmail" type="email" inputmode="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" placeholder="your@email.com" class="form-control flex-1" />
+        <button id="magicLinkBtn" type="button" class="btn btn-success">Send Link</button>
+      </div>
+    </div>
+
+    <p id="errorMsg" class="text-sm text-error-color mt-3 hidden"></p>
+  </div>
+</div>
+{% endblock %}

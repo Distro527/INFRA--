@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+  <section class="text-center py-16">
+    <h1 class="text-4xl font-extrabold tracking-tight">Master Coding with VoidSyn</h1>
+    <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Interactive lessons, clean explanations, and hands-on practice. Sign in to track your progress.</p>
+    <div class="mt-6 space-x-3">
+      <a href="/courses" class="inline-flex items-center px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700">Browse Courses</a>
+      {% if not g.user %}
+        <a href="/login" class="inline-flex items-center px-4 py-2 rounded bg-slate-200 hover:bg-slate-300">Sign In</a>
+      {% endif %}
+    </div>
+  </section>
+  <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <div class="p-5 rounded-lg border bg-white">
+      <h3 class="font-semibold">Beginner Friendly</h3>
+      <p class="text-sm text-slate-600 mt-2">Start with the basics and build up gradually with guided lessons.</p>
+    </div>
+    <div class="p-5 rounded-lg border bg-white">
+      <h3 class="font-semibold">Hands-on Examples</h3>
+      <p class="text-sm text-slate-600 mt-2">Real code snippets and walkthroughs in each lesson.</p>
+    </div>
+    <div class="p-5 rounded-lg border bg-white">
+      <h3 class="font-semibold">Track Progress</h3>
+      <p class="text-sm text-slate-600 mt-2">Sign in to save your progress and continue where you left off.</p>
+    </div>
+  </section>
+{% endblock %}

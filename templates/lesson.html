@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="grid grid-cols-1 lg:grid-cols-[16rem_minmax(0,1fr)] gap-8">
+    {% if toc_html %}
+      <aside class="hidden lg:block">
+        <div class="sticky top-6">
+          <div class="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">On this page</div>
+          <nav class="text-sm space-y-0.5">
+            {{ toc_html | safe }}
+          </nav>
+        </div>
+      </aside>
+    {% endif %}
+
+    <div>
+      <article class="prose prose-slate max-w-none">
+        <h1>{{ title }}</h1>
+        {% if summary or (tags and tags|length) %}
+          <div class="not-prose mb-4">
+            {% if summary %}
+              <p class="text-slate-600">{{ summary }}</p>
+            {% endif %}
+            {% if tags and tags|length %}
+              <div class="mt-2 flex flex-wrap gap-2">
+                {% for t in tags %}
+                  <span class="inline-flex items-center text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700">{{ t }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div>{{ content_html | safe }}</div>
+      </article>
+
+      <div class="mt-6">
+        <button id="toggle-complete" data-slug="{{ slug }}" class="px-4 py-2 bg-indigo-600 text-white rounded">Mark as complete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      // Progress toggle
+      var btn = document.getElementById('toggle-complete');
+      var slug = btn ? btn.getAttribute('data-slug') : '';
+
+      function refresh() {
+        fetch('/api/progress', {credentials: 'include'})
+          .then(r=>r.json())
+          .then(d=>{
+            var done = (d.completed || []).indexOf(slug) !== -1;
+            if (btn) {
+              btn.textContent = done ? 'Undo complete' : 'Mark as complete';
+              btn.dataset.done = done ? '1' : '0';
+            }
+          })
+          .catch(()=>{});
+      }
+
+      if (btn) {
+        btn.addEventListener('click', function(){
+          var want = btn.dataset.done !== '1';
+          fetch('/api/progress', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify({slug: slug, completed: want})
+          }).then(()=>refresh());
+        });
+      }
+
+      refresh();
+
+      // Run JS/HTML examples
+      function runExample(wrapper){
+        var pre = wrapper.querySelector('pre > code');
+        if (!pre) return;
+        var cls = pre.getAttribute('class') || '';
+        var isJS = /language-(js|javascript)/.test(cls);
+        var isHTML = /language-html/.test(cls);
+        var code = pre.textContent;
+        var out = wrapper.querySelector('.vs-output');
+        var iframe = out ? out.querySelector('iframe') : null;
+        if (!iframe) return;
+        out.classList.remove('hidden');
+        try {
+          var doc = iframe.contentWindow.document;
+          doc.open();
+          if (isHTML) {
+            doc.write(code);
+          } else if (isJS) {
+            doc.write('<!doctype html><html><head><meta charset="utf-8" /></head><body><script>' + code.replace(/<\//g,'<\\/') + '<\/script></body></html>');
+          } else {
+            doc.write('<!doctype html><html><body><pre>Runnable example requires JS or HTML.</pre></body></html>');
+          }
+          doc.close();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      document.querySelectorAll('.vs-run-js').forEach(function(b){
+        b.addEventListener('click', function(){
+          var wrapper = b.closest('.not-prose');
+          if (wrapper) runExample(wrapper);
+        });
+      });
+
+      // Quiz checkers
+      document.querySelectorAll('.vs-quiz').forEach(function(box){
+        var checkBtn = box.querySelector('.vs-quiz-check');
+        if (!checkBtn) return;
+        var result = box.querySelector('.vs-quiz-result');
+        var explain = box.querySelector('.vs-quiz-explain');
+        var answer = parseInt(box.getAttribute('data-answer') || '-1', 10);
+        checkBtn.addEventListener('click', function(){
+          var chosen = box.querySelector('input[type="radio"]:checked');
+          if (!chosen) {
+            if (result) { result.textContent = 'Select an answer.'; result.className = 'vs-quiz-result text-sm text-slate-600'; }
+            return;
+          }
+          var val = parseInt(chosen.value || '-1', 10);
+          var correct = (val === answer);
+          if (result) {
+            result.textContent = correct ? 'Correct!' : 'Try again';
+            result.className = 'vs-quiz-result text-sm ' + (correct ? 'text-emerald-700' : 'text-rose-700');
+          }
+          if (explain) {
+            explain.classList.toggle('hidden', !correct);
+          }
+        });
+      });
+    })();
+  </script>
+{% endblock %}

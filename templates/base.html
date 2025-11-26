@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>INFRA+ - Build & Deploy</title>
+    <link rel="stylesheet" href="/static/css/windsurf.css" />
+    <link rel="icon" href="/static/images/infra-favicon.svg" />
+    <script src="https://kit.webawesome.com/d60064973a4a43ae.js" crossorigin="anonymous"></script>
+  </head>
+  <body class="min-h-screen flex flex-col bg-surface text-primary">
+    <header class="header">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <img src="/static/images/infra-logo-chatgpt.svg" alt="INFRA+" width="180" height="50" />
+        </a>
+        <form action="/search" method="get" class="search-form">
+          <label class="sr-only" for="vs-q">Search</label>
+          <input id="vs-q" name="q" type="search" placeholder="Search lessons..." class="search-input" value="{{ request.args.get('q','') }}" />
+        </form>
+        <nav class="flex gap-4 text-sm items-center">
+
+          <button onclick="openBeamer()" class="text-xs px-3 py-1 bg-primary text-white rounded hover:bg-primary-dark transition-colors">
+            📢 What's New
+          </button>
+          <a href="/courses" class="nav-link">Courses</a>
+          <a href="/support" class="nav-link">Support</a>
+          {% if g.user %}
+            <a href="/dashboard" class="nav-link">Dashboard</a>
+            <button id="logoutBtn" class="btn btn-secondary btn-sm">Logout</button>
+          {% else %}
+            <a class="btn btn-primary btn-sm" href="/login">Sign In</a>
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="main-content">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        © {{ 2025 }} INFRA+. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="/config.js"></script>
+    <script type="module" src="/static/auth.js"></script>
+    
+<!-- Start of OpenWidget (www.openwidget.com) code -->
+<script>
+  window.__ow = window.__ow || {};
+  window.__ow.organizationId = "7236b826-7a2c-4ff8-b788-1fb4da4addca";
+  window.__ow.integration_name = "manual_settings";
+  window.__ow.product_name = "openwidget";   
+  ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[OpenWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.openwidget.com/openwidget.js",t.head.appendChild(n)}};!n.__ow.asyncInit&&e.init(),n.OpenWidget=n.OpenWidget||e}(window,document,[].slice))
+</script>
+<noscript>You need to <a href="https://www.openwidget.com/enable-javascript" rel="noopener nofollow">enable JavaScript</a> to use the communication tool powered by <a href="https://www.openwidget.com/" rel="noopener nofollow" target="_blank">OpenWidget</a></noscript>
+<!-- End of OpenWidget code -->
+<script>"use strict";
+
+!function() {
+    var t = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjVkNjQ1ZDk0M2EzMzg1ODg1NTkzYSIsInRva2VuVHlwZSI6InB1YmxpYyIsImlhdCI6MTc2NDA4ODgwOCwiZXhwIjoxNDM3ODQ4ODgwOH0.Jzha6OCK61e7cXWUb2-Uw-JB4pGs6_cCiS48qpux17M";
+    function e() {
+        var e = document.createElement("script"), a = navigator.language || navigator.userLanguage;
+        e.type = "text/javascript", e.async = !0, e.src = "https://api.searchbar.org/v1/widget/" + t + "/" + a;
+        var n = document.getElementsByTagName("script")[0];
+        n.parentNode.insertBefore(e, n);
+    }
+    "complete" === document.readyState ? e() : window.attachEvent ? window.attachEvent("onload", e) : window.addEventListener("load", e, !1);
+}();</script>
+<script>
+  var beamer_config = {
+    product_id : "RNeLPoml80577", // DO NOT CHANGE: This is your product code on Beamer
+    user_id : "guest", // A unique ID to identify the user
+    debug: true,
+    filter: false, // Show all posts
+    language: 'en' // Force English
+  };
+  
+  // Function to safely open Beamer
+  function openBeamer() {
+    console.log('Attempting to open Beamer...');
+    
+    if (typeof Beamer !== 'undefined') {
+      console.log('Beamer is available, showing...');
+      console.log('Beamer methods available:', Object.keys(Beamer));
+      
+      try {
+        // Try different methods
+        console.log('Trying Beamer.show()...');
+        Beamer.show();
+        
+        // If show doesn't work, try other methods
+        setTimeout(() => {
+          if (!document.querySelector('.beamer-container')) {
+            console.log('Beamer.show() didnt show popup, trying Beamer.init()...');
+            Beamer.init();
+            setTimeout(() => Beamer.show(), 500);
+          }
+        }, 1000);
+        
+      } catch (error) {
+        console.error('Error calling Beamer.show():', error);
+        // Try alternative method
+        try {
+          console.log('Trying Beamer.openNewsFeed()...');
+          Beamer.openNewsFeed();
+        } catch (error2) {
+          console.error('Error with alternative method:', error2);
+          // Fallback to direct URL
+          window.open('https://app.getbeamer.com/infra-plus', '_blank');
+        }
+      }
+    } else {
+      console.log('Beamer not loaded, showing fallback');
+      // Fallback: open Beamer directly
+      window.open('https://app.getbeamer.com/infra-plus', '_blank');
+    }
+  }
+  
+  // Check if Beamer loaded after 3 seconds
+  setTimeout(function() {
+    if (typeof Beamer === 'undefined') {
+      console.log('Beamer failed to load');
+    } else {
+      console.log('Beamer loaded successfully');
+      console.log('Beamer object:', Beamer);
+      console.log('Beamer methods:', Object.keys(Beamer));
+    }
+  }, 3000);
+  
+  // Also try auto-initializing after page load
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      if (typeof Beamer !== 'undefined') {
+        console.log('Auto-initializing Beamer...');
+        Beamer.init();
+      }
+    }, 2000);
+  });
+</script>
+<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+  </body>
+</html>

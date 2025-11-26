@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1 class="text-2xl font-bold">Dashboard</h1>
+  <p class="mt-2 text-slate-700">Welcome{% if user and user.email %}, {{ user.email }}{% endif %}!</p>
+
+  <div class="mt-6 grid md:grid-cols-2 gap-6">
+    <div class="border rounded-lg bg-white p-5">
+      <h2 class="font-semibold">Your Profile</h2>
+      <ul class="mt-3 text-sm text-slate-700">
+        <li><span class="font-medium">UID:</span> {{ user.uid }}</li>
+        {% if user.email %}<li><span class="font-medium">Email:</span> {{ user.email }}</li>{% endif %}
+        {% if user.name %}<li><span class="font-medium">Name:</span> {{ user.name }}</li>{% endif %}
+      </ul>
+    </div>
+
+    <div class="border rounded-lg bg-white p-5">
+      <h2 class="font-semibold">Progress</h2>
+      <div class="mt-3">
+        <div class="w-full bg-slate-200 h-3 rounded">
+          <div id="progress-bar" class="h-3 bg-green-500 rounded" style="width: 0%"></div>
+        </div>
+        <p class="mt-2 text-slate-600 text-sm">
+          <span id="progress-count">0</span>/<span id="progress-total">0</span> lessons completed
+          (<span id="progress-percent">0</span>%)
+        </p>
+        <div class="mt-3">
+          <a href="/courses" class="text-blue-600 hover:underline text-sm">Browse lessons</a>
+        </div>
+      </div>
+      <script>
+        (function(){
+          fetch('/api/progress', {credentials: 'include'})
+            .then(r => r.ok ? r.json() : {completed:[], total:0, percent:0})
+            .then(d => {
+              var total = d.total || 0;
+              var completed = (d.completed || []).length;
+              var percent = d.percent || (total ? Math.round((completed/total)*100) : 0);
+              document.getElementById('progress-count').textContent = completed;
+              document.getElementById('progress-total').textContent = total;
+              document.getElementById('progress-percent').textContent = percent;
+              document.getElementById('progress-bar').style.width = percent + '%';
+            })
+            .catch(() => {});
+        })();
+      </script>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <h2 class="text-xl font-semibold">Recommended Lessons</h2>
+    <ul class="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {% for l in lessons %}
+        <li class="border rounded-lg bg-white p-4">
+          <h3 class="font-semibold">{{ l.title }}</h3>
+          {% if l.summary %}
+            <p class="text-sm text-slate-600 mt-1">{{ l.summary }}</p>
+          {% endif %}
+          {% if l.tags %}
+            <div class="mt-2 flex flex-wrap gap-2">
+              {% for t in l.tags %}
+                <span class="px-2 py-0.5 text-xs rounded bg-slate-100 text-slate-700">{{ t }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <a class="inline-block mt-3 text-indigo-600 hover:underline" href="/lesson/{{ l.slug }}">Open lesson</a>
+        </li>
+      {% else %}
+        <li class="text-slate-600">No lessons yet. Visit <a class="text-indigo-600 hover:underline" href="/courses">Courses</a>.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

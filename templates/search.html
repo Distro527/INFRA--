@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="max-w-3xl">
+    <h1 class="text-2xl font-semibold mb-4">Search</h1>
+    <form action="/search" method="get" class="mb-6">
+      <input class="w-full border rounded px-3 py-2" type="search" name="q" placeholder="Search lessons..." value="{{ q }}" />
+    </form>
+
+    {% if q %}
+      <div class="text-slate-600 text-sm mb-3">Results for "{{ q }}"</div>
+    {% endif %}
+
+    {% if results and results|length %}
+      <ul class="space-y-4">
+        {% for r in results %}
+          <li class="p-4 bg-white border rounded">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <a class="text-lg font-medium hover:underline" href="/lesson/{{ r.slug }}">{{ r.title or r.slug }}</a>
+                {% if r.summary %}
+                  <p class="text-slate-600 text-sm mt-1">{{ r.summary }}</p>
+                {% endif %}
+                {% if r.tags and r.tags|length %}
+                  <div class="mt-2 flex flex-wrap gap-2">
+                    {% for t in r.tags %}
+                      <span class="inline-flex items-center text-xs px-2 py-0.5 rounded bg-slate-100 text-slate-700">{{ t }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+              <a class="text-sm text-indigo-700 hover:underline whitespace-nowrap" href="/lesson/{{ r.slug }}">Open →</a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-slate-600">No results.</p>
+    {% endif %}
+  </div>
+{% endblock %}

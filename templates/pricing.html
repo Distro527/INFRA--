@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="text-center py-16">
+  <h1 class="text-4xl font-bold">Unlock INFRA+- Pro</h1>
+  <p class="text-secondary mt-4 max-w-2xl mx-auto">Get lifetime access to premium content and advanced features.</p>
+</section>
+
+<section class="container py-8">
+  <div class="grid md:grid-cols-2 gap-8">
+    <!-- Free Plan -->
+    <div class="card">
+      <h3 class="text-2xl font-bold">Free</h3>
+      <p class="text-secondary mt-2">Perfect for getting started</p>
+      <div class="mt-4">
+        <span class="text-3xl font-bold">£0</span>
+        <span class="text-secondary">/forever</span>
+      </div>
+      <ul class="mt-6 space-y-3 text-sm">
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Basic coding lessons
+        </li>
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Progress tracking
+        </li>
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Community support
+        </li>
+      </ul>
+      {% if not g.user %}
+      <div class="mt-8">
+        <a href="/login" class="btn btn-outline btn-full">Get Started</a>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Pro Plan -->
+    <div class="card border-2 bg-primary-light relative">
+      <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">
+        MOST POPULAR
+      </div>
+      <h3 class="text-2xl font-bold">Pro</h3>
+      <p class="text-secondary mt-2">For serious learners</p>
+      <div class="mt-4">
+        <span class="text-3xl font-bold">£9.99</span>
+        <span class="text-secondary">/lifetime</span>
+      </div>
+      <ul class="mt-6 space-y-3 text-sm">
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Everything in Free
+        </li>
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Advanced Pro lessons
+        </li>
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Real-world projects
+        </li>
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Priority support
+        </li>
+        <li class="flex items-center">
+          <svg class="w-4 h-4 text-success-color mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+          Certificate of completion
+        </li>
+      </ul>
+      <div class="mt-8">
+        {% if g.user %}
+        <button id="checkout-button" class="btn btn-primary btn-full">Upgrade to Pro</button>
+        {% else %}
+        <a href="/login?next=/pricing" class="btn btn-primary btn-full">Sign In to Upgrade</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const stripeKey = '{{ stripe_publishable_key }}';
+  const isLoggedIn = {% if g.user %}true{% else %}false{% endif %};
+  const hasStripeKey = {% if stripe_publishable_key %}true{% else %}false{% endif %};
+  
+  console.log('Stripe key:', stripeKey);
+  console.log('User logged in:', isLoggedIn);
+  console.log('Stripe key available:', hasStripeKey);
+  
+  if (isLoggedIn && hasStripeKey) {
+    // Load Stripe and set up checkout
+    const script = document.createElement('script');
+    script.src = 'https://js.stripe.com/v3';
+    script.onload = function() {
+      const stripe = Stripe(stripeKey);
+      
+      document.getElementById('checkout-button').addEventListener('click', async () => {
+        console.log('Checkout button clicked');
+        try {
+          const response = await fetch('/create-checkout-session', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          
+          console.log('Response status:', response.status);
+          const session = await response.json();
+          console.log('Session:', session);
+          
+          if (session.error) {
+            alert(session.error);
+            return;
+          }
+          
+          const result = await stripe.redirectToCheckout({
+            sessionId: session.id,
+          });
+          
+          if (result.error) {
+            alert(result.error.message);
+          }
+        } catch (error) {
+          console.error('Checkout error:', error);
+          alert('An error occurred. Please try again.');
+        }
+      });
+    };
+    document.head.appendChild(script);
+  }
+</script>
+{% endblock %}
