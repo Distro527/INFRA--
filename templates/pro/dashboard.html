@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="text-center py-16">
+  <h1 class="text-4xl font-bold">INFRA+- Pro Dashboard</h1>
+  <p class="text-secondary mt-4 max-w-2xl mx-auto">Welcome to your premium learning experience. Access exclusive content and track your progress.</p>
+</section>
+
+<section class="container py-8">
+  <div class="mb-8 p-6 bg-primary-light rounded-lg">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-2xl font-bold text-primary">Pro Member</h2>
+        <p class="text-secondary mt-1">You have lifetime access to all premium content</p>
+      </div>
+      <div class="text-4xl">🚀</div>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for lesson in lessons %}
+    <div class="card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="badge badge-primary">
+          PRO
+        </span>
+        <div class="text-2xl">📚</div>
+      </div>
+      
+      <h3 class="text-lg font-semibold mb-2">{{ lesson.title }}</h3>
+      <p class="text-secondary text-sm mb-4">{{ lesson.summary }}</p>
+      
+      <div class="flex flex-wrap gap-1 mb-4">
+        {% for tag in lesson.tags %}
+        <span class="badge badge-secondary">
+          {{ tag }}
+        </span>
+        {% endfor %}
+      </div>
+      
+      <a href="/lesson/{{ lesson.slug }}" class="text-primary hover:text-primary-hover text-sm font-medium">
+        Start Learning →
+      </a>
+    </div>
+    {% else %}
+    <div class="col-span-full text-center py-12">
+      <div class="text-6xl mb-4">🚧</div>
+      <h3 class="text-xl font-semibold text-primary">Pro Content Coming Soon</h3>
+      <p class="text-secondary mt-2">We're working on amazing premium content for you. Check back soon!</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-12 grid md:grid-cols-2 gap-8">
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-4">🎯 Your Progress</h3>
+      <div class="space-y-3">
+        <div class="flex justify-between">
+          <span class="text-secondary">Pro Lessons Completed</span>
+          <span class="font-medium">0 / {{ lessons|length }}</span>
+        </div>
+        <div class="w-full bg-surface rounded-full h-2">
+          <div class="bg-primary h-2 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-4">🏆 Achievements</h3>
+      <div class="space-y-2">
+        <div class="flex items-center text-secondary">
+          <span class="text-2xl mr-3">🌟</span>
+          <span>Pro Member - Unlocked!</span>
+        </div>
+        <div class="flex items-center text-muted">
+          <span class="text-2xl mr-3">📖</span>
+          <span>First Pro Lesson - Complete a lesson</span>
+        </div>
+        <div class="flex items-center text-muted">
+          <span class="text-2xl mr-3">🎓</span>
+          <span>Pro Scholar - Complete all Pro lessons</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
