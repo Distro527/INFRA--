@@ -1,0 +1,34 @@
+services:
+  # Web Service
+  - type: web
+    name: infra-plus
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /healthz
+    
+    # Environment Variables (Set these in Render Dashboard)
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.5
+      - key: FLASK_ENV
+        value: production
+      - key: SESSION_COOKIE_SECURE
+        value: true
+      - key: SESSION_COOKIE_HTTPONLY
+        value: true
+      - key: SESSION_COOKIE_SAMESITE
+        value: Lax
+
+# Add these environment variables in Render Dashboard:
+# FIREBASE_WEB_API_KEY
+# FIREBASE_WEB_AUTH_DOMAIN  
+# FIREBASE_PROJECT_ID
+# FIREBASE_WEB_APP_ID
+# FIREBASE_WEB_MESSAGING_SENDER_ID
+# FIREBASE_SERVICE_ACCOUNT_KEY (upload as file)
+# STRIPE_PUBLISHABLE_KEY
+# STRIPE_SECRET_KEY
+# STRIPE_WEBHOOK_SECRET
+# SECRET_KEY
